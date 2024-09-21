@@ -29,7 +29,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody String newProduct) {
 
-        Product product = new Product(newProduct, newProduct, newProduct);
+        Product product = new Product(newProduct, newProduct, newProduct, newProduct, newProduct);
+        // Aca deberia desempaqeutar el JSON y crear un usuario con esos datos
 
         ServiceResponse<String> response = crudProductService.addNewProduct(product);
 
