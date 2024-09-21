@@ -27,6 +27,16 @@ public class CRUDProductService {
         return new ServiceResponse<ArrayList<Product>>(true, "ok", dbProduct.getProducts());
     }
 
+    public ServiceResponse<Boolean> updateProduct(Product oldProduct, Product newProduct){
+        if (!validateProduct()){
+            return new ServiceResponse<Boolean>(false, "Error: No es posible actualizar", false);
+        }
+        dbProduct.removeProduct(oldProduct);
+        dbProduct.addProduct(newProduct);
+
+        return new ServiceResponse<Boolean>(true, "ok", true);
+    }
+
     private boolean validateAuth(){
         return true;
     }
