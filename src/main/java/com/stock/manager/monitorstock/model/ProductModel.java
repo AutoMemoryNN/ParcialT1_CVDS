@@ -27,4 +27,8 @@ public class ProductModel implements DBProduct {
     public boolean existProduct(Product product){
         return products.contains(product);
     }
+
+    public ArrayList<Product> getProducts(){
+        return products;
+    }
 }

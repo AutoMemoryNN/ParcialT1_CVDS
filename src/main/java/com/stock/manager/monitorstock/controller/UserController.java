@@ -1,6 +1,5 @@
 package com.stock.manager.monitorstock.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.stock.manager.monitorstock.ServiceResponse;
 import com.stock.manager.monitorstock.model.Product;
 import com.stock.manager.monitorstock.service.CRUDProductService;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 @RestController
@@ -21,7 +19,11 @@ public class UserController {
 
     @GetMapping
     public String getUser() {
-        return "Hello World";
+        ServiceResponse<ArrayList<Product>> response = crudProductService.getProducts();
+        if (response.ok()){
+            return response.data().toString();
+        }
+        return response.message();
     }
 
     @PostMapping
@@ -29,7 +31,7 @@ public class UserController {
 
         Product product = new Product(newProduct, newProduct, newProduct);
 
-        ServiceResponse response = crudProductService.addNewProduct(product);
+        ServiceResponse<String> response = crudProductService.addNewProduct(product);
 
         if(response.ok()){
             return ResponseEntity.ok().header(response.message()).body(newProduct);
